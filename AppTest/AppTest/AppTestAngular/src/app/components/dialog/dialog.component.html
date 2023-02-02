@@ -1,0 +1,16 @@
+<h1 *ngIf="isAddMode">Add User</h1>
+<h1 *ngIf="!isAddMode">Edit User</h1>
+<form [formGroup]="createForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="name" class="label-form">Name</label>
+    <input type="text" formControlName="name" required />
+  </div>
+  <div class="form-group">
+    <label for="age" class="label-form">Age</label>
+    <input type="number" formControlName="age" />
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-button type="submit" cdkFocusInitial>Ok</button>
+  </div>
+</form>

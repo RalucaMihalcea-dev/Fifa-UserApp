@@ -1,0 +1,74 @@
+<h1>{{ title }}</h1>
+<br />
+<div class="container">
+  <div class="row-form">
+    <div class="col-sm">
+      <form [formGroup]="createForm" (ngSubmit)="create()">
+        <div class="form-group">
+          <label for="name" class="label-form">Name</label>
+          <input type="text" formControlName="name" required />
+        </div>
+        <div class="form-group">
+          <label for="age" class="label-form">Age</label>
+          <input type="number" formControlName="age" />
+        </div>
+        <button type="submit" class="btn btn-default">Create</button>
+      </form>
+    </div>
+    <div class="col-sm">
+      <form [formGroup]="filterForm" (ngSubmit)="filter()">
+        <div class="form-group">
+          <label for="minAge" class="label-form">MinAge</label>
+          <input type="number" formControlName="minAge" required />
+        </div>
+        <div class="form-group">
+          <label for="maxAge" class="label-form">MaxAge</label>
+          <input type="number" formControlName="maxAge" />
+        </div>
+        <button type="submit" class="btn btn-default">Filter</button>
+        <button type="button" class="btn btn-default" (click)="clearFilter()">
+          Clear
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+<div *ngIf="!!filteredUsers && filteredUsers.length > 0">
+  <table class="table">
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Edit Action</th>
+      <th>Delete Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of filteredUsers">
+        <td>{{ record.id }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.age }}</td>
+        <td>
+          <button
+            type="button"
+            (click)="openDialog(false, record)"
+            class="btn btn-warning"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            (click)="remove(record.id)"
+            class="btn btn-danger"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+<button mat-raised-button (click)="openDialog(true)">Create New Player</button>
